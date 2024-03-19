@@ -1,17 +1,52 @@
+<head>
+    <link rel="stylesheet" href="../../Assets/CSS/main.css">
+    <style>
+        
+.category-items{
+    background-color: #FFF;
+    padding: 64px;
+    margin: 64px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.category-items article{
+    width: 30%;
+    margin-bottom: 16px;
+}
+
+.menu-item>figure>img{
+    width: 100%;
+}
+
+.menu-item>figcaption>header{
+    display: flex;
+    justify-content: space-between;
+    color: var(--primary);
+    font-weight: bold;
+margin-left: 32px;
+margin-right: 32px;
+}
+
+.menu-item>figcaption>p{
+text-align: start;
+margin-left: 32px;
+margin-right: 32px;
+}
+
+    </style>
+</head>
 <section id="menu">
-    <section id="tabs">
-        <button><b>Lunch</b></button>
-        <button>Dinner</button>
-        <button>Dessert</button>
-        <button>Wines</button>
-    </section>
-    <p>Lunch is served from 11:00 am until 3:00 pm</p>
+    <p style="color: var(--primary); font-family: 'Segoe UI';">Lunch is served from 11:00 am until 3:00 pm</p>
     <section id="menu-categories">
         <section class="menu-category">
             <h3>Appetizers</h3>
             <section class="category-items">
-                <article>
-                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Caprese" alt="Caprese Salad"/>
+                <article class="menu-item">
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Caprese"
+                            alt="Caprese Salad" />
                     </figure>
                     <figcaption>
                         <header>
@@ -23,9 +58,9 @@
                         </p>
                     </figcaption>
                 </article>
-                <article>
-                    <figure><img class="item-img"
-                            src="https://source.unsplash.com/random/300x300/?Shrimp,Cocktail" alt="Shrimp Cocktail"/></figure>
+                <article class="menu-item">
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Shrimp,Cocktail"
+                            alt="Shrimp Cocktail" /></figure>
                     <figcaption>
                         <header>
                             <h5>Shrimp Cocktail</h5>
@@ -34,9 +69,9 @@
                         <p>Cooked and chilled jumbo shrimp, served with homemade cocktail sauce.</p>
                     </figcaption>
                 </article>
-                <article>
-                    <figure><img class="item-img"
-                            src="https://source.unsplash.com/random/300x300/?Cooked,Mussels" alt="Cooked Mussels"/></figure>
+                <article class="menu-item">
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Cooked,Mussels"
+                            alt="Cooked Mussels" /></figure>
                     <figcaption>
                         <header>
                             <h5>Mussels</h5>
@@ -52,8 +87,8 @@
             <h3>Sandwiches</h3>
             <section class="category-items">
                 <article class="menu-item">
-                    <figure><img class="item-img"
-                            src="https://source.unsplash.com/random/300x300/?Meatball,Sandwich" alt="Homemade Meatball Sandwich"/></figure>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Meatball,Sandwich"
+                            alt="Homemade Meatball Sandwich" /></figure>
                     <figcaption>
                         <header>
                             <h5>Homemade Meatball</h5>
@@ -63,8 +98,8 @@
                     </figcaption>
                 </article>
                 <article class="menu-item">
-                    <figure><img class="item-img"
-                            src="https://source.unsplash.com/random/300x300/?Sausage,Sandwich" alt="Sausage Sandwich"/></figure>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Sausage,Sandwich"
+                            alt="Sausage Sandwich" /></figure>
                     <figcaption>
                         <header>
                             <h5>Sausage Sandwich</h5>
@@ -74,8 +109,8 @@
                     </figcaption>
                 </article>
                 <article class="menu-item">
-                    <figure><img class="item-img"
-                            src="https://source.unsplash.com/random/300x300/?Italian,Cold,Sub" alt="Italian Cold Sub"/></figure>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Italian,Cold,Sub"
+                            alt="Italian Cold Sub" /></figure>
                     <figcaption>
                         <header>
                             <h5>Italian Cold Sub</h5>
@@ -92,7 +127,8 @@
             <h3>Soups and Salads</h3>
             <section class="category-items">
                 <article class="menu-item">
-                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Salad1" alt="Mixed Green Salad"/>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Salad"
+                            alt="Mixed Green Salad" />
                     </figure>
                     <figcaption>
                         <header>
@@ -104,8 +140,8 @@
                     </figcaption>
                 </article>
                 <article class="menu-item">
-                    <figure><img class="item-img"
-                            src="https://source.unsplash.com/random/300x300/?Salad2" alt="Ceasar Salad"/></figure>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Salad"
+                            alt="Ceasar Salad" /></figure>
                     <figcaption>
                         <header>
                             <h5>Ceasar Salad</h5>
@@ -117,8 +153,8 @@
                     </figcaption>
                 </article>
                 <article class="menu-item">
-                    <figure><img class="item-img"
-                            src="https://source.unsplash.com/random/300x300/?Italian,Chef,Salad3" alt="Italian Chef Salad"/></figure>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Italian,Chef,Salad"
+                            alt="Italian Chef Salad" /></figure>
                     <figcaption>
                         <header>
                             <h5>Italian Chef Salad</h5>
@@ -129,8 +165,8 @@
                     </figcaption>
                 </article>
                 <article class="menu-item">
-                    <figure><img class="item-img"
-                            src="https://source.unsplash.com/random/300x300/?Soup" alt="Miestrone Soup"/></figure>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Soup"
+                            alt="Miestrone Soup" /></figure>
                     <figcaption>
                         <header>
                             <h5>Miestrone</h5>
@@ -146,7 +182,8 @@
             <h3>Specials</h3>
             <section class="category-items">
                 <article class="menu-item">
-                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Pizza" alt="Homemade Pizza"/>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Pizza"
+                            alt="Homemade Pizza" />
                     </figure>
                     <figcaption>
                         <header>
@@ -159,8 +196,8 @@
                     </figcaption>
                 </article>
                 <article class="menu-item">
-                    <figure><img class="item-img"
-                            src="https://source.unsplash.com/random/300x300/?Pizza, Salad" alt="Lunch Special for 2: Salad and Pizza"/></figure>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Pizza, Salad"
+                            alt="Lunch Special for 2: Salad and Pizza" /></figure>
                     <figcaption>
                         <header>
                             <h5>Lunch Special for 2</h5>
@@ -170,7 +207,8 @@
                     </figcaption>
                 </article>
                 <article class="menu-item">
-                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Soup" alt="Soup of the Day"/>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Soup"
+                            alt="Soup of the Day" />
                     </figure>
                     <figcaption>
                         <header>
@@ -188,7 +226,8 @@
             <section class="category-items">
                 <!-- Baked Lasagna -->
                 <article class="menu-item">
-                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Lasagna" alt="Baked Lasagna"/>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Lasagna"
+                            alt="Baked Lasagna" />
                     </figure>
                     <figcaption>
                         <header>
@@ -201,8 +240,8 @@
 
                 <!-- Cheese Tortellini -->
                 <article class="menu-item">
-                    <figure><img class="item-img"
-                            src="https://source.unsplash.com/random/300x300/?Tortellini" alt="Cheese Tortellini"/></figure>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Tortellini"
+                            alt="Cheese Tortellini" /></figure>
                     <figcaption>
                         <header>
                             <h5>Cheese Tortellini</h5>
@@ -214,7 +253,8 @@
 
                 <!-- Cheese Ravioli -->
                 <article class="menu-item">
-                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Ravioli" alt="Cheese Ravioli"/>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Ravioli"
+                            alt="Cheese Ravioli" />
                     </figure>
                     <figcaption>
                         <header>
@@ -227,7 +267,8 @@
 
                 <!-- Gnocchi -->
                 <article class="menu-item">
-                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Gnocchi" alt="Gnocchi"/>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Gnocchi"
+                            alt="Gnocchi" />
                     </figure>
                     <figcaption>
                         <header>
@@ -240,7 +281,8 @@
 
                 <!-- Manicotti -->
                 <article class="menu-item">
-                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Manicotti" alt="Manicotti"/>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Manicotti"
+                            alt="Manicotti" />
                     </figure>
                     <figcaption>
                         <header>
@@ -254,7 +296,8 @@
 
                 <!-- Choice of Pasta -->
                 <article class="menu-item">
-                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Pasta" alt="Choice of Pasta"/>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Pasta"
+                            alt="Choice of Pasta" />
                     </figure>
                     <figcaption>
                         <header>
@@ -268,8 +311,8 @@
 
                 <!-- Eggplant Parmigiana -->
                 <article class="menu-item">
-                    <figure><img class="item-img"
-                            src="https://source.unsplash.com/random/300x300/?Eggplant,Spaghetti" alt="Eggplant Parmigiana"/></figure>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Eggplant,Spaghetti"
+                            alt="Eggplant Parmigiana" /></figure>
                     <figcaption>
                         <header>
                             <h5>Eggplant Parmigiana</h5>
@@ -282,8 +325,8 @@
 
                 <!-- Chicken Parmigiana -->
                 <article class="menu-item">
-                    <figure><img class="item-img"
-                            src="https://source.unsplash.com/random/300x300/?Chicken,Spaghetti" alt="Chicken Parmigiana"/></figure>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Chicken,Spaghetti"
+                            alt="Chicken Parmigiana" /></figure>
                     <figcaption>
                         <header>
                             <h5>Chicken Parmigiana</h5>
@@ -296,8 +339,8 @@
 
                 <!-- Chicken Marsala -->
                 <article class="menu-item">
-                    <figure><img class="item-img"
-                            src="https://source.unsplash.com/random/300x300/?Cooked,Chicken3" alt="Chicken Marsala"/>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Cooked,Chicken3"
+                            alt="Chicken Marsala" />
                     </figure>
                     <figcaption>
                         <header>
@@ -310,8 +353,8 @@
 
                 <!-- Chicken Piccata -->
                 <article class="menu-item">
-                    <figure><img class="item-img"
-                            src="https://source.unsplash.com/random/300x300/?Cooked,Chicken" alt="Chicken Piccata"/>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Cooked,Chicken"
+                            alt="Chicken Piccata" />
                     </figure>
                     <figcaption>
                         <header>
@@ -325,8 +368,8 @@
 
                 <!-- Chicken Cacciatore -->
                 <article class="menu-item">
-                    <figure><img class="item-img"
-                            src="https://source.unsplash.com/random/300x300/?Cooked,Chicken2" alt="Chicken Cacciatore"/></figure>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Cooked,Chicken2"
+                            alt="Chicken Cacciatore" /></figure>
                     <figcaption>
                         <header>
                             <h5>Chicken Cacciatore</h5>

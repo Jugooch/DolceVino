@@ -1,17 +1,52 @@
+<head>
+    <link rel="stylesheet" href="../../Assets/CSS/main.css">
+    <style>
+        
+.category-items{
+    background-color: #FFF;
+    padding: 64px;
+    margin: 64px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.category-items article{
+    width: 30%;
+    margin-bottom: 16px;
+}
+
+.menu-item>figure>img{
+    width: 100%;
+}
+
+.menu-item>figcaption>header{
+    display: flex;
+    justify-content: space-between;
+    color: var(--primary);
+    font-weight: bold;
+margin-left: 32px;
+margin-right: 32px;
+}
+
+.menu-item>figcaption>p{
+text-align: start;
+margin-left: 32px;
+margin-right: 32px;
+}
+
+    </style>
+</head>
 <section id="menu">
-    <section id="tabs">
-        <button>Lunch</button>
-        <button><b>Dinner</b></button>
-        <button>Dessert</button>
-        <button>Wines</button>
-    </section>
-    <p>Dinner is served from 3:00 pm until 9:00 pm</p>
+    <p style="color: var(--primary); font-family: 'Segoe UI';">Dinner is served from 3:00 pm until 9:00 pm</p>
     <section id="menu-categories">
         <section class="menu-category">
             <h3>Appetizers</h3>
             <section class="category-items">
-                <article>
-                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Caprese"
+                <article class="menu-item">
+                    <figure>
+                        <img class="item-img" src="https://source.unsplash.com/random/300x300/?Caprese"
                             alt="Caprese Salad" />
                     </figure>
                     <figcaption>
@@ -24,7 +59,7 @@
                         </p>
                     </figcaption>
                 </article>
-                <article>
+                <article class="menu-item">
                     <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Shrimp,Cocktail"
                             alt="Shrimp Cocktail" /></figure>
                     <figcaption>
@@ -35,8 +70,9 @@
                         <p>Cooked and chilled jumbo shrimp, served with homemade cocktail sauce.</p>
                     </figcaption>
                 </article>
-                <article>
-                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Cooked,Mussels"
+                <article class="menu-item">
+                    <figure>
+                        <img class="item-img" src="https://source.unsplash.com/random/300x300/?Mussels"
                             alt="Cooked Mussels" /></figure>
                     <figcaption>
                         <header>
@@ -67,7 +103,7 @@
             <h3>Soups and Salads</h3>
             <section class="category-items">
                 <article class="menu-item">
-                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Salad1"
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Salad"
                             alt="Mixed Green Salad" />
                     </figure>
                     <figcaption>
@@ -80,8 +116,9 @@
                     </figcaption>
                 </article>
                 <article class="menu-item">
-                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Salad2"
-                            alt="Ceasar Salad" /></figure>
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?salad"
+                            alt="Ceasar Salad"/>
+                    </figure>
                     <figcaption>
                         <header>
                             <h5>Ceasar Salad</h5>
@@ -93,7 +130,7 @@
                     </figcaption>
                 </article>
                 <article class="menu-item">
-                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Italian,Chef,Salad3"
+                    <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?ham"
                             alt="Italian Chef Salad" /></figure>
                     <figcaption>
                         <header>
