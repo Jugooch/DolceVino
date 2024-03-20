@@ -63,14 +63,14 @@
             position: relative;
         }
 
-        #tabs{
+        #tabs {
             display: flex;
             justify-content: center;
             gap: 16px;
             margin-top: 32px;
         }
 
-        #tabs>button{
+        #tabs>button {
             background-color: var(--white);
             border: none;
             color: var(--secondary);
@@ -80,45 +80,149 @@
             padding-bottom: 8px;
         }
 
-        #tabs>button.active{
+        #tabs>button.active {
             font-weight: bold;
             border-bottom: 1px solid var(--secondary);
         }
 
-        #about-us{
+        #about-us {
             display: flex;
             flex-direction: column;
             gap: 32px;
             padding: 64px;
         }
 
-        #about-us>div{
+        #about-us>div {
             display: flex;
             justify-content: space-between;
             text-align: center;
         }
-        
-        #about-us>div>img, #about-us>div>aside{
+
+        #about-us>div>img,
+        #about-us>div>aside {
             width: 45%;
         }
 
-        #about-us>div>aside{
+        #about-us>div>aside {
             display: flex;
             flex-direction: column;
             gap: 32px;
             align-items: center;
         }
-        
-        #about-us>div>aside>img{
+
+        #about-us>div>aside>img {
             width: 50%;
         }
 
-        .divider{
+        .divider {
             height: 2px;
             width: 100%;
             background-color: var(--primary);
             margin-top: 4px;
         }
+
+        h5 {
+            color: var(--primary);
+            font-family: "Segoe UI";
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0px;
+        }
+
+        #gallery {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 16px;
+        }
+
+        #contact-us {
+            padding: 64px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #contact-us>section {
+            width: 25%;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .business-hour {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .business-hour>p {
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        #email {
+            width: 65%;
+        }
+
+        #facebook {
+            width: 20%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .below-divider {
+            margin-top: 16px;
+        }
+
+        #input-group {
+    display: flex;
+    width: 100%;
+}
+
+#input-group > input, 
+#input-group > button {
+    height: 32px;
+}
+
+#input-group > input {
+    flex: 3; /* Takes up 3 parts of the container space */
+    margin-right: -1px;
+    border-radius: 8px 0px 0px 8px;
+    border: 1px solid var(--primary);
+}
+
+#input-group > button {
+    flex: 1; /* Takes up 1 part of the container space */
+    height: auto;
+    border-radius: 0px 8px 8px 0px;
+    background-color: var(--primary);
+    color: #FFF;
+    font-family: Arial;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border: none;
+}
+
+#copyright{
+    background-color: var(--primary);
+    padding-left: 64px;
+    padding-right: 64px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    color: #FFF;
+}
+
     </style>
 </head>
 
@@ -157,9 +261,12 @@
             </section>
             <div id="tab-content" align="center">
                 <div id="lunch-content" class="content" data-source="./fragments/lunch.html">Loading...</div>
-                <div id="dinner-content" class="content" data-source="./fragments/dinner.html" style="display: none;">Loading...</div>
-                <div id="dessert-content" class="content" data-source="./fragments/dessert.html" style="display: none;">Loading...</div>
-                <div id="wines-content" class="content" data-source="./fragments/wines.html" style="display: none;">Loading...</div>
+                <div id="dinner-content" class="content" data-source="./fragments/dinner.html" style="display: none;">
+                    Loading...</div>
+                <div id="dessert-content" class="content" data-source="./fragments/dessert.html" style="display: none;">
+                    Loading...</div>
+                <div id="wines-content" class="content" data-source="./fragments/wines.html" style="display: none;">
+                    Loading...</div>
             </div>
         </section>
 
@@ -168,31 +275,36 @@
         </header>
         <section id="about-us">
             <div>
-            <img src="../Assets/Images/AboutUs.png" alt="About Us Image" />
-            <aside>
-                <div style="width: 100%; text-align: start;">
-                <h5>A Shared Vision</h5>
-                <section class="divider"></section>
+                <img src="../Assets/Images/AboutUs.png" alt="About Us Image" />
+                <aside>
+                    <div style="width: 100%; text-align: start;">
+                        <header>
+                            <h5>A Shared Vision</h5>
+                            <section class="divider"></section>
+                        </header>
+                    </div>
+                    <p>With more than 30 years in the restaurant business, extraordinary chef, Ernesto Mazzoni, had an
+                        idea
+                        that he would like to again have a venue for serving special food to the public. But he wanted
+                        this
+                        time to be a little different; He wanted to spotlight quality wine.</p>
+                    <p>Wine connoisseur Timothy Bulger, had an idea that he would like to share his love of quality wine
+                        with the public. He also wanted to serve excellent food. These two men also happened to be good
+                        friends with a mutual respect for each other’s talents. As a result, their visions came together
+                        and
+                        they combined their ideas in the opening of:</p>
+                    <img src="../Assets/Images/Logo.png" alt="Restaurant Logo" />
+                    <p>We hope you will enjoy our dining as much as we enjoy bringing it to you!</p>
+                </aside>
             </div>
-                <p>With more than 30 years in the restaurant business, extraordinary chef, Ernesto Mazzoni, had an idea
-                    that he would like to again have a venue for serving special food to the public. But he wanted this
-                    time to be a little different; He wanted to spotlight quality wine.</p>
-                <p>Wine connoisseur Timothy Bulger, had an idea that he would like to share his love of quality wine
-                    with the public. He also wanted to serve excellent food. These two men also happened to be good
-                    friends with a mutual respect for each other’s talents. As a result, their visions came together and
-                    they combined their ideas in the opening of:</p>
-                <img src="../Assets/Images/Logo.png" alt="Restaurant Logo" />
-                <p>We hope you will enjoy our dining as much as we enjoy bringing it to you!</p>
-            </aside>
-            </div>
-            <section id="gallery">
+            <section>
                 <h5>Gallery</h5>
                 <section class="divider"></section>
-                <section>
+                <section id="gallery">
                     <img class="gallery-img" src="../Assets/Images/Gallery1.png" alt="Gallery Image 1" />
                     <img class="gallery-img" src="../Assets/Images/Gallery2.png" alt="Gallery Image 2" />
                     <img class="gallery-img" src="../Assets/Images/Gallery3.png" alt="Gallery Image 3" />
-                    <img class="gallery-img show-more" src="../Assets/Images/Gallery4.png" alt="Gallery Image 4" />
+                    <img class="gallery-img" src="../Assets/Images/Gallery4.png" alt="Gallery Image 4" />
                 </section>
             </section>
         </section>
@@ -200,107 +312,128 @@
         <header class="section-header">
             <h2>Contact Us</h2>
         </header>
-        <section id="contact-us">
-            <section>
-                <article>
-                    <h5>Phone</h5>
+        <section>
+            <section id="contact-us">
+                <section class="column">
+                    <article>
+                        <header>
+                            <h5>Phone</h5>
+                            <section class="divider"></section>
+                        </header>
+                        <section class="row">
+                            <img src="../Assets/Icons/phone.png" alt="Phone Icon" width="20px" />
+                            <p>(623) 463-8104</p>
+                        </section>
+                    </article>
+                    <article>
+                        <header>
+                            <h5>Food</h5>
+                            <section class="divider"></section>
+                        </header>
+                        <section class="row">
+                            <img src="../Assets/Icons/email.png" alt="Email Icon for Food Inquiries" width="20px" />
+                            <p>ernesto@dolcevinowinebar.com</p>
+                        </section>
+                    </article>
+                    <article>
+                        <header>
+                            <h5>Wine</h5>
+                            <section class="divider"></section>
+                        </header>
+                        <section class="row">
+                            <img src="../Assets/Icons/email.png" alt="Email Icon for Wine Inquiries" width="20px" />
+                            <p>tim@dolcevinowinebar.com</p>
+                        </section>
+                    </article>
+                </section>
+                <section>
+                    <article>
+                        <figure><img src="../Assets/Images/Location.png" alt="Dolce Vino Location" /></figure>
+                        <header>
+                            <h5>Address</h5>
+                            <section class="divider"></section>
+                        </header>
+                        <section class="row">
+                            <img src="../Assets/Icons/location.png" alt="Map Pin Icon" width="20px" />
+                            <p>Dolce Vino<br />4935 W. Glendale Ave, Ste 17<br />Glendale, AZ 85301</p>
+                        </section>
+                    </article>
+                </section>
+                <section>
+                    <header>
+                        <h5>Business Hours</h5>
+                        <section class="divider"></section>
+                    </header>
+                    <ul style="list-style-type: none; margin-block-start: 0px; padding-inline-start: 0px;">
+                        <li>
+                            <section class="business-hour">
+                                <p>Monday</p>
+                                <p>11am - 9pm</p>
+                            </section>
+                        </li>
+                        <li>
+                            <section class="business-hour">
+                                <p>Tuesday</p>
+                                <p>11am - 9pm</p>
+                            </section>
+                        </li>
+                        <li>
+                            <section class="business-hour">
+                                <p>Wednesday</p>
+                                <p>11am - 9pm</p>
+                            </section>
+                        </li>
+                        <li>
+                            <section class="business-hour">
+                                <p>Thursday</p>
+                                <p>11am - 9pm</p>
+                            </section>
+                        </li>
+                        <li>
+                            <section class="business-hour">
+                                <p>Friday</p>
+                                <p>11am - 9pm</p>
+                            </section>
+                        </li>
+                        <li>
+                            <section class="business-hour">
+                                <p>Saturday</p>
+                                <p>11am - 9pm</p>
+                            </section>
+                        </li>
+                        <li>
+                            <section class="business-hour">
+                                <p>Sunday</p>
+                                <p>Closed</p>
+                            </section>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section style="display: flex; justify-content: space-between; padding: 64px">
+                <section id="email">
+                    <label for="email-input">
+                        <h5>Want an inside scoop on our specials?</h5>
+                    </label>
                     <section class="divider"></section>
-                    <section>
-                        <img src="" alt="Phone Icon" />
-                        <p>(623) 463-8104</p>
-                    </section>
-                </article>
-                <article>
-                    <h5>Food</h5>
-                    <section class="divider"></section>
-                    <section>
-                        <img src="" alt="Email Icon for Food Inquiries" />
-                        <p>ernesto@dolcevinowinebar.com</p>
-                    </section>
-                </article>
-                <article>
-                    <h5>Wine</h5>
-                    <section class="divider"></section>
-                    <section>
-                        <img src="" alt="Email Icon for Wine Inquiries" />
-                        <p>tim@dolcevinowinebar.com</p>
-                    </section>
-                </article>
+                    <form id="input-group" class="below-divider">
+                        <input type="email" id="email-input" name="email-input" />
+                        <button id="input-btn" type="submit">Sign Up Here</button>
+                    </form>
+                </section>
+                <section id="facebook">
+                    <header>
+                        <h5>Follow us on Facebook</h5>
+                        <section class="divider"></section>
+                    </header>
+                    <a href="https://www.facebook.com/dolcevinowinebar/">
+                        <img class="below-divider" src="../Assets/Images/FacebookLogo.png" id="facebook-icon"
+                            alt="Facebook Logo" /></a>
+                </section>
             </section>
-            <section>
-                <article>
-                    <figure><img src="../Assets/Images/Location.png" alt="Location Icon" /></figure>
-                    <h5>Address</h5>
-                    <section class="divider"></section>
-                    <section>
-                        <img src="" alt="Map Pin Icon" />
-                        <p>Dolce Vino<br />4935 W. Glendale Ave, Ste 17<br />Glendale, AZ 85301</p>
-                    </section>
-                </article>
-            </section>
-            <section>
-                <h5>Business Hours</h5>
-                <section class="divider"></section>
-                <ul>
-                    <li>
-                        <section class="business-hour">
-                            <p>Monday</p>
-                            <p>11am - 9pm</p>
-                        </section>
-                    </li>
-                    <li>
-                        <section class="business-hour">
-                            <p>Tuesday</p>
-                            <p>11am - 9pm</p>
-                        </section>
-                    </li>
-                    <li>
-                        <section class="business-hour">
-                            <p>Wednesday</p>
-                            <p>11am - 9pm</p>
-                        </section>
-                    </li>
-                    <li>
-                        <section class="business-hour">
-                            <p>Thursday</p>
-                            <p>11am - 9pm</p>
-                        </section>
-                    </li>
-                    <li>
-                        <section class="business-hour">
-                            <p>Friday</p>
-                            <p>11am - 9pm</p>
-                        </section>
-                    </li>
-                    <li>
-                        <section class="business-hour">
-                            <p>Saturday</p>
-                            <p>11am - 9pm</p>
-                        </section>
-                    </li>
-                    <li>
-                        <section class="business-hour">
-                            <p>Sunday</p>
-                            <p>Closed</p>
-                        </section>
-                    </li>
-                </ul>
-            </section>
-            <section>
-                <label for="email-input">Want an inside scoop on our specials?</label>
-                <section class="divider"></section>
-                <form id="input-group">
-                    <input type="email" id="email-input" name="email-input" />
-                    <button id="input-btn" type="submit">Sign Up Here</button>
-                </form>
-            </section>
-            <section>
-                <h5>Follow us on Facebook</h5>
-                <section class="divider"></section>
-                <a href="https://www.facebook.com/dolcevinowinebar/">
-                    <img src="../Assets/Images/FacebookLogo.png" id="facebook-icon" alt="Facebook Logo" /></a>
-            </section>
+
             <footer>
+                <section class="nav" style="box-shadow: none;">
                 <img src="../Assets/Images/Logo.png" alt="Footer Restaurant Logo" />
                 <nav>
                     <a href="#top">Home</a>
@@ -308,7 +441,8 @@
                     <a href="#about-us">About Us</a>
                     <a href="#contact-us">Contact Us</a>
                 </nav>
-                <section id="copyright">
+                </section>
+                <section id="copyright" align="center">
                     <p>© 2024 MB La Dolce Vita, LLC</p>
                 </section>
             </footer>
