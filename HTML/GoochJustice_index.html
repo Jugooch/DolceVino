@@ -6,11 +6,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Website: HTML</title>
 
+    
+    <!-- Importing jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
     <!--Importing a main css file for shared styles between the email and website-->
     <!--This includes some CSS variables for colors-->
     <link rel="stylesheet" href="../Assets//CSS/main.css">
     <script src="../Assets/Javascript/main.js"></script>
+
+    
+    <!-- Adding JQuery to animate scrolling in the application -->
+    <script>
+        $(document).ready(function () {
+            // Smooth scrolling
+            $("a").on('click', function (event) {
+                if (this.hash !== "") {
+                    event.preventDefault();
+                    var hash = this.hash;
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 800, function () {
+                        window.location.hash = hash;
+                    });
+                }
+            });
+
+            // Animate elements on scroll
+            $(window).scroll(function () {
+                $('.animated-element').each(function () {
+                    var pos = $(this).offset().top;
+                    var winTop = $(window).scrollTop();
+                    if (pos < winTop + 600) {
+                        $(this).addClass("slide");
+                    }
+                });
+            });
+
+            // Scroll-to-top button
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('.scroll-to-top').fadeIn();
+                } else {
+                    $('.scroll-to-top').fadeOut();
+                }
+            });
+
+            $('.scroll-to-top').click(function () {
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 800);
+                return false;
+            });
+        });
+    </script>
 
     <style>
         .hero {
@@ -34,6 +84,15 @@
             justify-content: flex-start;
             background-color: var(--white);
             box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .animated-element {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slide {
+            opacity: 1;
         }
 
         .nav nav {
@@ -83,6 +142,40 @@
         #tabs>button.active {
             font-weight: bold;
             border-bottom: 1px solid var(--secondary);
+        }
+
+        .category-items {
+            background-color: #FFF;
+            padding: 64px;
+            margin: 64px;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .category-items article {
+            width: 30%;
+            margin-bottom: 16px;
+        }
+
+        .menu-item>figure>img {
+            width: 100%;
+        }
+
+        .menu-item>figcaption>header {
+            display: flex;
+            justify-content: space-between;
+            color: var(--primary);
+            font-weight: bold;
+            margin-left: 32px;
+            margin-right: 32px;
+        }
+
+        .menu-item>figcaption>p {
+            text-align: start;
+            margin-left: 32px;
+            margin-right: 32px;
         }
 
         #about-us {
@@ -184,45 +277,46 @@
         }
 
         #input-group {
-    display: flex;
-    width: 100%;
-}
+            display: flex;
+            width: 100%;
+        }
 
-#input-group > input, 
-#input-group > button {
-    height: 32px;
-}
+        #input-group>input,
+        #input-group>button {
+            height: 32px;
+        }
 
-#input-group > input {
-    flex: 3; /* Takes up 3 parts of the container space */
-    margin-right: -1px;
-    border-radius: 8px 0px 0px 8px;
-    border: 1px solid var(--primary);
-}
+        #input-group>input {
+            flex: 3;
+            /* Takes up 3 parts of the container space */
+            margin-right: -1px;
+            border-radius: 8px 0px 0px 8px;
+            border: 1px solid var(--primary);
+        }
 
-#input-group > button {
-    flex: 1; /* Takes up 1 part of the container space */
-    height: auto;
-    border-radius: 0px 8px 8px 0px;
-    background-color: var(--primary);
-    color: #FFF;
-    font-family: Arial;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    border: none;
-}
+        #input-group>button {
+            flex: 1;
+            /* Takes up 1 part of the container space */
+            height: auto;
+            border-radius: 0px 8px 8px 0px;
+            background-color: var(--primary);
+            color: #FFF;
+            font-family: Arial;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            border: none;
+        }
 
-#copyright{
-    background-color: var(--primary);
-    padding-left: 64px;
-    padding-right: 64px;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    color: #FFF;
-}
-
+        #copyright {
+            background-color: var(--primary);
+            padding-left: 64px;
+            padding-right: 64px;
+            padding-top: 16px;
+            padding-bottom: 16px;
+            color: #FFF;
+        }
     </style>
 </head>
 
@@ -249,10 +343,8 @@
         <header class="section-header">
             <h2>Our Menu</h2>
         </header>
-        <section id="menu">
-            <!--------------------------------------------------------------------------------->
-            <!--this uses html fragments sort of like a Vue/React Component-->
-            <!--------------------------------------------------------------------------------->
+        <section id="menu" class="animated-element">
+            <!--Dynamically load content based on tab clicked-->
             <section id="tabs">
                 <button data-target="lunch-content">Lunch</button>
                 <button data-target="dinner-content">Dinner</button>
@@ -260,20 +352,1806 @@
                 <button data-target="wines-content">Wines</button>
             </section>
             <div id="tab-content" align="center">
-                <div id="lunch-content" class="content" data-source="./fragments/lunch.html">Loading...</div>
-                <div id="dinner-content" class="content" data-source="./fragments/dinner.html" style="display: none;">
-                    Loading...</div>
-                <div id="dessert-content" class="content" data-source="./fragments/dessert.html" style="display: none;">
-                    Loading...</div>
-                <div id="wines-content" class="content" data-source="./fragments/wines.html" style="display: none;">
-                    Loading...</div>
-            </div>
+                <div id="lunch-content" class="content">
+                    <section>
+                        <p style="color: var(--primary); font-family: 'Segoe UI';">Lunch is served from 11:00 am until
+                            3:00 pm</p>
+                        <section id="menu-categories">
+                            <section class="menu-category">
+                                <h3>Appetizers</h3>
+                                <section class="category-items">
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Caprese"
+                                                alt="Caprese Salad" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Caprese</h5>
+                                                <h5>8</h5>
+                                            </header>
+                                            <p>Fresh mozzarella, fresh tomatoes, basil leaves sprinkled with EVOO and
+                                                balsamic
+                                                vinegar.
+                                            </p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Shrimp,Cocktail"
+                                                alt="Shrimp Cocktail" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Shrimp Cocktail</h5>
+                                                <h5>7</h5>
+                                            </header>
+                                            <p>Cooked and chilled jumbo shrimp, served with homemade cocktail sauce.</p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Cooked,Mussels"
+                                                alt="Cooked Mussels" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Mussels</h5>
+                                                <h5>6</h5>
+                                            </header>
+                                            <p>Fresh mussels sautéed in white wine, garlic, and creamy butter.</p>
+                                        </figcaption>
+                                    </article>
+                                </section>
+                            </section>
+
+                            <section class="menu-category">
+                                <h3>Sandwiches</h3>
+                                <section class="category-items">
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Meatball,Sandwich"
+                                                alt="Homemade Meatball Sandwich" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Homemade Meatball</h5>
+                                                <h5>11</h5>
+                                            </header>
+                                            <p>Sliced meatballs, marinara, and melted cheese.</p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Sausage,Sandwich"
+                                                alt="Sausage Sandwich" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Sausage Sandwich</h5>
+                                                <h5>12</h5>
+                                            </header>
+                                            <p>Sausage topped with marinara and melted cheese.</p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Italian,Cold,Sub"
+                                                alt="Italian Cold Sub" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Italian Cold Sub</h5>
+                                                <h5>10</h5>
+                                            </header>
+                                            <p>Ham, salami and capicollo meats, mozzarella and provolone cheeses,
+                                                Italian Dressing
+                                            </p>
+                                        </figcaption>
+                                    </article>
+                                </section>
+                            </section>
+
+                            <section class="menu-category">
+                                <h3>Soups and Salads</h3>
+                                <section class="category-items">
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Salad"
+                                                alt="Mixed Green Salad" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Mixed Green Salad</h5>
+                                                <h5>5</h5>
+                                            </header>
+                                            <p>Spring Mix with black olives, tomatoes and carrots served with dressing
+                                                (Italian,
+                                                Raspberry Vinaigrette, Bleu Cheese, or Ranch). Add Chicken or Shrimp</p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Salad"
+                                                alt="Ceasar Salad" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Ceasar Salad</h5>
+                                                <h5>6</h5>
+                                            </header>
+                                            <p>Crisp romaine lettuce tossed with Caesar dressing, croutons, parmesan
+                                                cheese
+                                                shavings.Add
+                                                Chicken, Shrimp or Salmon.</p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Italian,Chef,Salad"
+                                                alt="Italian Chef Salad" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Italian Chef Salad</h5>
+                                                <h5>7</h5>
+                                            </header>
+                                            <p>An array of leaf lettuce with ham, salami, capicollo meats, mozzarella,
+                                                and provolone
+                                                cheeses</p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Soup"
+                                                alt="Miestrone Soup" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Miestrone</h5>
+                                                <h5>6</h5>
+                                            </header>
+                                            <p>Fresh vegetables, beans, and pasta in a light tomato broth.</p>
+                                        </figcaption>
+                                    </article>
+                                </section>
+                            </section>
+
+                            <section class="menu-category">
+                                <h3>Specials</h3>
+                                <section class="category-items">
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Pizza"
+                                                alt="Homemade Pizza" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>10" Homemade Pizza</h5>
+                                                <h5>12</h5>
+                                            </header>
+                                            <p>Choice of 2 Items - Pepperoni, meatball, sausage, mushroom, black olive,
+                                                onion,
+                                                roasted
+                                                red peppers</p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Pizza, Salad"
+                                                alt="Lunch Special for 2: Salad and Pizza" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Lunch Special for 2</h5>
+                                                <h5>15</h5>
+                                            </header>
+                                            <p>Combination of a salad and a pizza</p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Soup"
+                                                alt="Soup of the Day" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Soup of the Day</h5>
+                                                <h5>5</h5>
+                                            </header>
+                                            <p>Ask your server about our rotating soup of the day!</p>
+                                        </figcaption>
+                                    </article>
+                                </section>
+                            </section>
+
+                            <section class="menu-category">
+                                <h3>Entrees</h3>
+                                <section class="category-items">
+                                    <!-- Baked Lasagna -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Lasagna"
+                                                alt="Baked Lasagna" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Baked Lasagna</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Layers of cheeses and meat sauce</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Cheese Tortellini -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Tortellini"
+                                                alt="Cheese Tortellini" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Cheese Tortellini</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>With red or white Sauce</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Cheese Ravioli -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Ravioli"
+                                                alt="Cheese Ravioli" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Cheese Ravioli</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>With red or white sauce</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Gnocchi -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Gnocchi"
+                                                alt="Gnocchi" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Gnocchi</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Tender potato dumplings served with your choice or red or white sauce.
+                                            </p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Manicotti -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Manicotti"
+                                                alt="Manicotti" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Manicotti</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Pasta shells stuffed with 5-cheeses and spinach. Topped with marinara &
+                                                melted cheese
+                                            </p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Choice of Pasta -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Pasta"
+                                                alt="Choice of Pasta" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Choice of Pasta</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>With Meat Sauce, Meatballs or Sausage. Spaghetti, linguini, or rigatoni
+                                                pasta.
+                                                Gluten-free pasta available upon request ($1.50 extra)</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Eggplant Parmigiana -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Eggplant,Spaghetti"
+                                                alt="Eggplant Parmigiana" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Eggplant Parmigiana</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Tender, breaded eggplant topped with marinara and mozzarella cheese.
+                                                Served with
+                                                spaghetti.</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Chicken Parmigiana -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Chicken,Spaghetti"
+                                                alt="Chicken Parmigiana" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Chicken Parmigiana</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Breaded chicken breast topped with marinara & melted mozzarella. Served
+                                                with
+                                                spaghetti.</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Chicken Marsala -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Cooked,Chicken3"
+                                                alt="Chicken Marsala" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Chicken Marsala</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Sautéed chicken breasts in a savory mushroom sauce. Served over
+                                                spaghetti.</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Chicken Piccata -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Cooked,Chicken"
+                                                alt="Chicken Piccata" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Chicken Piccata</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Chicken breasts sautéed with white wine, butter, lemon, & capers. Served
+                                                over
+                                                spaghetti.</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Chicken Cacciatore -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Cooked,Chicken2"
+                                                alt="Chicken Cacciatore" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Chicken Cacciatore</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Chicken sautéed in red wine, peppers, mushrooms, marinara sauce. Served
+                                                with pasta
+                                                choice.</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <article class="menu-item">
+                                    </article>
+                                </section>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <div id="dinner-content" class="content" style="display: none;">
+                    <section>
+                        <p style="color: var(--primary); font-family: 'Segoe UI';">Dinner is served from 3:00 pm until
+                            9:00 pm</p>
+                        <section id="menu-categories">
+                            <section class="menu-category">
+                                <h3>Appetizers</h3>
+                                <section class="category-items">
+                                    <article class="menu-item">
+                                        <figure>
+                                            <img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Caprese"
+                                                alt="Caprese Salad" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Caprese</h5>
+                                                <h5>8</h5>
+                                            </header>
+                                            <p>Fresh mozzarella, fresh tomatoes, basil leaves sprinkled with EVOO and
+                                                balsamic
+                                                vinegar.
+                                            </p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Shrimp,Cocktail"
+                                                alt="Shrimp Cocktail" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Shrimp Cocktail</h5>
+                                                <h5>7</h5>
+                                            </header>
+                                            <p>Cooked and chilled jumbo shrimp, served with homemade cocktail sauce.</p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                        <figure>
+                                            <img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Mussels"
+                                                alt="Cooked Mussels" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Mussels</h5>
+                                                <h5>6</h5>
+                                            </header>
+                                            <p>Fresh mussels sautéed in white wine, garlic, and creamy butter.</p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Pizza"
+                                                alt="Homemade Pizza" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>10" Homemade Pizza</h5>
+                                                <h5>12</h5>
+                                            </header>
+                                            <p>Choice of 2 Items - Pepperoni, meatball, sausage, mushroom, black olive,
+                                                onion,
+                                                roasted
+                                                red peppers</p>
+                                        </figcaption>
+                                    </article>
+                                </section>
+                            </section>
+
+                            <section class="menu-category">
+                                <h3>Soups and Salads</h3>
+                                <section class="category-items">
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Salad"
+                                                alt="Mixed Green Salad" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Mixed Green Salad</h5>
+                                                <h5>5</h5>
+                                            </header>
+                                            <p>Spring Mix with black olives, tomatoes and carrots served with dressing
+                                                (Italian,
+                                                Raspberry Vinaigrette, Bleu Cheese, or Ranch). Add Chicken or Shrimp</p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?salad"
+                                                alt="Ceasar Salad" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Ceasar Salad</h5>
+                                                <h5>6</h5>
+                                            </header>
+                                            <p>Crisp romaine lettuce tossed with Caesar dressing, croutons, parmesan
+                                                cheese
+                                                shavings.Add
+                                                Chicken, Shrimp or Salmon.</p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?ham"
+                                                alt="Italian Chef Salad" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Italian Chef Salad</h5>
+                                                <h5>7</h5>
+                                            </header>
+                                            <p>An array of leaf lettuce with ham, salami, capicollo meats, mozzarella,
+                                                and provolone
+                                                cheeses</p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Soup"
+                                                alt="Miestrone Soup" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Miestrone</h5>
+                                                <h5>6</h5>
+                                            </header>
+                                            <p>Fresh vegetables, beans, and pasta in a light tomato broth.</p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Soup"
+                                                alt="Soup of the Day" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Soup of the Day</h5>
+                                                <h5>5</h5>
+                                            </header>
+                                            <p>Ask your server about our rotating soup of the day!</p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                    </article>
+                                </section>
+                            </section>
+
+                            <section class="menu-category">
+                                <h3>Entrees</h3>
+                                <section class="category-items">
+                                    <!-- Baked Lasagna -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Lasagna" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Baked Lasagna</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Layers of cheeses and meat sauce</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Cheese Tortellini -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Tortellini" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Cheese Tortellini</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>With red or white Sauce</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Cheese Ravioli -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Ravioli" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Cheese Ravioli</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>With red or white sauce</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Gnocchi -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Gnocchi" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Gnocchi</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Tender potato dumplings served with your choice or red or white sauce.
+                                            </p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Manicotti -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Manicotti" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Manicotti</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Pasta shells stuffed with 5-cheeses and spinach. Topped with marinara &
+                                                melted cheese
+                                            </p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Choice of Pasta -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Pasta" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Choice of Pasta</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>With Meat Sauce, Meatballs or Sausage. Spaghetti, linguini, or rigatoni
+                                                pasta.
+                                                Gluten-free pasta available upon request ($1.50 extra)</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Eggplant Parmigiana -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Eggplant,Spaghetti" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Eggplant Parmigiana</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Tender, breaded eggplant topped with marinara and mozzarella cheese.
+                                                Served with
+                                                spaghetti.</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Chicken Parmigiana -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Chicken,Spaghetti" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Chicken Parmigiana</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Breaded chicken breast topped with marinara & melted mozzarella. Served
+                                                with
+                                                spaghetti.</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Chicken Marsala -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Marsala" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Chicken Marsala</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Sautéed chicken breasts in a savory mushroom sauce. Served over
+                                                spaghetti.</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Chicken Piccata -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Piccata" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Chicken Piccata</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Chicken breasts sautéed with white wine, butter, lemon, & capers. Served
+                                                over
+                                                spaghetti.</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Chicken Cacciatore -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Chicken,Cacciatore" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Chicken Cacciatore</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Chicken sautéed in red wine, peppers, mushrooms, marinara sauce. Served
+                                                with pasta
+                                                choice.</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Linguini with Clams or Mussels -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Clams,Mussels" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Linguini with Clams or Mussels</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Clams or mussels in a white wine butter garlic sauce. Served over
+                                                linguini.</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Shrimp Scampi -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Shrimp,Scampi" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Shrimp Scampi</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Shrimp in a white wine butter garlic sauce. Served over linguini.</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Salmone Timoteo -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Salmon,Linguini" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Salmone Timoteo</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Salmon served with a white wine, butter, lemon sauce with capers. Served
+                                                over
+                                                linguini.</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Shrimp Ernesto -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Shrimp,Sautee" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Shrimp Ernesto</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Shrimp sautéed in Cognac with roasted red peppers, fresh tomato cream
+                                                sauce. Served
+                                                over linguini.</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Cioppino -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Cioppino,Linguini" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Cioppino</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Shrimp, mussels, clams, calamari, and scallops in a spicy red sauce.
+                                                Served over
+                                                linguini. (Add lobster tail $1.50)</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Salmone Alla Dolce Vino -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Salmon,Shrimp" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Salmone Alla Dolce Vino</h5>
+                                                <h5>$15</h5>
+                                            </header>
+                                            <p>Salmon and Shrimp sauteed in Cognac with roasted red peppers, fresh
+                                                tomato cream
+                                                sauce. Served over linguini.</p>
+                                        </figcaption>
+                                    </article>
+
+                                    <article class="menu-item">
+                                    </article>
+                                </section>
+                            </section>
+                        </section>
+                    </section>
+
+
+
+
+                    <section class="menu-category">
+                        <h3>Entrees</h3>
+                        <section class="category-items">
+                            <!-- Baked Lasagna -->
+                            <article class="menu-item">
+                                <figure><img class="item-img"
+                                        src="https://source.unsplash.com/random/300x300/?Lasagna" />
+                                </figure>
+                                <figcaption>
+                                    <header>
+                                        <h5>Baked Lasagna</h5>
+                                        <h5>$15</h5>
+                                    </header>
+                                    <p>Layers of cheeses and meat sauce</p>
+                                </figcaption>
+                            </article>
+
+                            <!-- Cheese Tortellini -->
+                            <article class="menu-item">
+                                <figure><img class="item-img"
+                                        src="https://source.unsplash.com/random/300x300/?Tortellini" /></figure>
+                                <figcaption>
+                                    <header>
+                                        <h5>Cheese Tortellini</h5>
+                                        <h5>$15</h5>
+                                    </header>
+                                    <p>With red or white Sauce</p>
+                                </figcaption>
+                            </article>
+
+                            <!-- Cheese Ravioli -->
+                            <article class="menu-item">
+                                <figure><img class="item-img"
+                                        src="https://source.unsplash.com/random/300x300/?Ravioli" />
+                                </figure>
+                                <figcaption>
+                                    <header>
+                                        <h5>Cheese Ravioli</h5>
+                                        <h5>$15</h5>
+                                    </header>
+                                    <p>With red or white sauce</p>
+                                </figcaption>
+                            </article>
+
+                            <!-- Gnocchi -->
+                            <article class="menu-item">
+                                <figure><img class="item-img"
+                                        src="https://source.unsplash.com/random/300x300/?Gnocchi" />
+                                </figure>
+                                <figcaption>
+                                    <header>
+                                        <h5>Gnocchi</h5>
+                                        <h5>$15</h5>
+                                    </header>
+                                    <p>Tender potato dumplings served with your choice or red or white sauce.</p>
+                                </figcaption>
+                            </article>
+
+                            <!-- Manicotti -->
+                            <article class="menu-item">
+                                <figure><img class="item-img"
+                                        src="https://source.unsplash.com/random/300x300/?Manicotti" />
+                                </figure>
+                                <figcaption>
+                                    <header>
+                                        <h5>Manicotti</h5>
+                                        <h5>$15</h5>
+                                    </header>
+                                    <p>Pasta shells stuffed with 5-cheeses and spinach. Topped with marinara & melted
+                                        cheese
+                                    </p>
+                                </figcaption>
+                            </article>
+
+                            <!-- Choice of Pasta -->
+                            <article class="menu-item">
+                                <figure><img class="item-img" src="https://source.unsplash.com/random/300x300/?Pasta" />
+                                </figure>
+                                <figcaption>
+                                    <header>
+                                        <h5>Choice of Pasta</h5>
+                                        <h5>$15</h5>
+                                    </header>
+                                    <p>With Meat Sauce, Meatballs or Sausage. Spaghetti, linguini, or rigatoni pasta.
+                                        Gluten-free pasta available upon request ($1.50 extra)</p>
+                                </figcaption>
+                            </article>
+
+                            <!-- Eggplant Parmigiana -->
+                            <article class="menu-item">
+                                <figure><img class="item-img"
+                                        src="https://source.unsplash.com/random/300x300/?Eggplant,Spaghetti" />
+                                </figure>
+                                <figcaption>
+                                    <header>
+                                        <h5>Eggplant Parmigiana</h5>
+                                        <h5>$15</h5>
+                                    </header>
+                                    <p>Tender, breaded eggplant topped with marinara and mozzarella cheese. Served with
+                                        spaghetti.</p>
+                                </figcaption>
+                            </article>
+
+                            <!-- Chicken Parmigiana -->
+                            <article class="menu-item">
+                                <figure><img class="item-img"
+                                        src="https://source.unsplash.com/random/300x300/?Chicken,Spaghetti" />
+                                </figure>
+                                <figcaption>
+                                    <header>
+                                        <h5>Chicken Parmigiana</h5>
+                                        <h5>$15</h5>
+                                    </header>
+                                    <p>Breaded chicken breast topped with marinara & melted mozzarella. Served with
+                                        spaghetti.</p>
+                                </figcaption>
+                            </article>
+
+                            <!-- Chicken Marsala -->
+                            <article class="menu-item">
+                                <figure><img class="item-img"
+                                        src="https://source.unsplash.com/random/300x300/?Marsala" /></figure>
+                                <figcaption>
+                                    <header>
+                                        <h5>Chicken Marsala</h5>
+                                        <h5>$15</h5>
+                                    </header>
+                                    <p>Sautéed chicken breasts in a savory mushroom sauce. Served over spaghetti.</p>
+                                </figcaption>
+                            </article>
+
+                            <!-- Chicken Piccata -->
+                            <article class="menu-item">
+                                <figure><img class="item-img"
+                                        src="https://source.unsplash.com/random/300x300/?Piccata" /></figure>
+                                <figcaption>
+                                    <header>
+                                        <h5>Chicken Piccata</h5>
+                                        <h5>$15</h5>
+                                    </header>
+                                    <p>Chicken breasts sautéed with white wine, butter, lemon, & capers. Served over
+                                        spaghetti.</p>
+                                </figcaption>
+                            </article>
+
+                            <!-- Chicken Cacciatore -->
+                            <article class="menu-item">
+                                <figure><img class="item-img"
+                                        src="https://source.unsplash.com/random/300x300/?Chicken,Cacciatore" />
+                                </figure>
+                                <figcaption>
+                                    <header>
+                                        <h5>Chicken Cacciatore</h5>
+                                        <h5>$15</h5>
+                                    </header>
+                                    <p>Chicken sautéed in red wine, peppers, mushrooms, marinara sauce. Served with
+                                        pasta
+                                        choice.</p>
+                                </figcaption>
+                            </article>
+
+                            <!-- Linguini with Clams or Mussels -->
+                            <article class="menu-item">
+                                <figure><img class="item-img"
+                                        src="https://source.unsplash.com/random/300x300/?Clams,Mussels" /></figure>
+                                <figcaption>
+                                    <header>
+                                        <h5>Linguini with Clams or Mussels</h5>
+                                        <h5>$15</h5>
+                                    </header>
+                                    <p>Clams or mussels in a white wine butter garlic sauce. Served over linguini.</p>
+                                </figcaption>
+                            </article>
+
+                            <!-- Shrimp Scampi -->
+                            <article class="menu-item">
+                                <figure><img class="item-img"
+                                        src="https://source.unsplash.com/random/300x300/?Shrimp,Scampi" /></figure>
+                                <figcaption>
+                                    <header>
+                                        <h5>Shrimp Scampi</h5>
+                                        <h5>$15</h5>
+                                    </header>
+                                    <p>Shrimp in a white wine butter garlic sauce. Served over linguini.</p>
+                                </figcaption>
+                            </article>
+
+                            <!-- Salmone Timoteo -->
+                            <article class="menu-item">
+                                <figure><img class="item-img"
+                                        src="https://source.unsplash.com/random/300x300/?Salmon,Linguini" />
+                                </figure>
+                                <figcaption>
+                                    <header>
+                                        <h5>Salmone Timoteo</h5>
+                                        <h5>$15</h5>
+                                    </header>
+                                    <p>Salmon served with a white wine, butter, lemon sauce with capers. Served over
+                                        linguini.</p>
+                                </figcaption>
+                            </article>
+
+                            <!-- Shrimp Ernesto -->
+                            <article class="menu-item">
+                                <figure><img class="item-img"
+                                        src="https://source.unsplash.com/random/300x300/?Shrimp,Sautee" />
+                                </figure>
+                                <figcaption>
+                                    <header>
+                                        <h5>Shrimp Ernesto</h5>
+                                        <h5>$15</h5>
+                                    </header>
+                                    <p>Shrimp sautéed in Cognac with roasted red peppers, fresh tomato cream sauce.
+                                        Served
+                                        over linguini.</p>
+                                </figcaption>
+                            </article>
+
+                            <!-- Cioppino -->
+                            <article class="menu-item">
+                                <figure><img class="item-img"
+                                        src="https://source.unsplash.com/random/300x300/?Cioppino,Linguini" />
+                                </figure>
+                                <figcaption>
+                                    <header>
+                                        <h5>Cioppino</h5>
+                                        <h5>$15</h5>
+                                    </header>
+                                    <p>Shrimp, mussels, clams, calamari, and scallops in a spicy red sauce. Served over
+                                        linguini. (Add lobster tail $1.50)</p>
+                                </figcaption>
+                            </article>
+
+                            <!-- Salmone Alla Dolce Vino -->
+                            <article class="menu-item">
+                                <figure><img class="item-img"
+                                        src="https://source.unsplash.com/random/300x300/?Salmon,Shrimp" /></figure>
+                                <figcaption>
+                                    <header>
+                                        <h5>Salmone Alla Dolce Vino</h5>
+                                        <h5>$15</h5>
+                                    </header>
+                                    <p>Salmon and Shrimp sauteed in Cognac with roasted red peppers, fresh tomato cream
+                                        sauce. Served over linguini.</p>
+                                </figcaption>
+                            </article>
+
+                            <article class="menu-item">
+                            </article>
+
+                        </section>
+                    </section>
+                </div>
+                <div id="dessert-content" class="content" style="display: none;">
+                    <section>
+                        <p style="color: var(--primary); font-family: 'Segoe UI';">Dessert is served from 11:00 am until
+                            9:00 pm</p>
+                        <section id="menu-categories">
+                            <section class="menu-category">
+                                <h3>Desserts</h3>
+                                <div class="category-items">
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Cream,Cake"
+                                                alt="Italian Lemon Cream Cake" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Italian Lemon Cream Cake</h5>
+                                            </header>
+                                            <p>A refreshing lemon cream filling with a light and fluffy cake base.</p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Carrot,Cake"
+                                                alt="Carrot Cake" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Carrot Cake</h5>
+                                            </header>
+                                            <p>Moist carrot cake with cream cheese frosting and a hint of cinnamon.</p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Cannoli"
+                                                alt="Cannoli" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Cannoli</h5>
+                                            </header>
+                                            <p>Crunchy pastry shells filled with sweet, creamy ricotta cheese and
+                                                chocolate chips.</p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Chocolate,Cake"
+                                                alt="Flourless Chocolate Cake" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Flourless Chocolate Cake</h5>
+                                            </header>
+                                            <p>Rich and dense chocolate cake, perfect for gluten-free chocolate lovers.
+                                            </p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Tiramisu"
+                                                alt="Homemade Tiramisu" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Homemade Tiramisu*</h5>
+                                            </header>
+                                            <p>Classic Italian dessert with layers of coffee-soaked ladyfingers and
+                                                mascarpone cream.</p>
+                                        </figcaption>
+                                    </article>
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?Ice,Cream"
+                                                alt="Homemade Spumoni" /></figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Homemade Spumoni</h5>
+                                            </header>
+                                            <p>Traditional Italian ice cream with layers of different flavors and
+                                                fruits.</p>
+                                        </figcaption>
+                                    </article>
+                                </div>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <div id="wines-content" class="content" style="display: none;">
+                    <section>
+                        <p style="color: var(--primary); font-family: 'Segoe UI';">Drinks are served from 11:00 am until
+                            9:00 pm</p>
+                        <section id="menu-categories">
+                            <section id="menu-categories">
+
+                                <!--Red Wines-->
+                                <section class="menu-category">
+                                    <h3>Red Wines</h3>
+                                    <section class="category-items">
+
+                                        <!-- Chianti Classico -->
+                                        <article class="menu-item">
+                                            <figure><img class="item-img"
+                                                    src="https://source.unsplash.com/random/300x300/?Red,wine,12"
+                                                    alt="House Red" />
+                                            </figure>
+                                            <figcaption>
+                                                <header>
+                                                    <h5>House Red</h5>
+                                                    <h5>6/24</h5>
+                                                </header>
+                                            </figcaption>
+                                        </article>
+
+                                        <!-- Chianti Classico -->
+                                        <article class="menu-item">
+                                            <figure><img class="item-img"
+                                                    src="https://source.unsplash.com/random/300x300/?Red,wine,1"
+                                                    alt="Chianti Classico" />
+                                            </figure>
+                                            <figcaption>
+                                                <header>
+                                                    <h5>Chianti Classico</h5>
+                                                    <h5>8/40</h5>
+                                                </header>
+                                            </figcaption>
+                                        </article>
+
+                                        <!-- Pinot Noir -->
+                                        <article class="menu-item">
+                                            <figure><img class="item-img"
+                                                    src="https://source.unsplash.com/random/300x300/?Red,wine,2"
+                                                    alt="Pinot Noir" />
+                                            </figure>
+                                            <figcaption>
+                                                <header>
+                                                    <h5>Pinot Noir</h5>
+                                                    <h5>9/45</h5>
+                                                </header>
+                                            </figcaption>
+                                        </article>
+
+                                        <!-- Merlot -->
+                                        <article class="menu-item">
+                                            <figure><img class="item-img"
+                                                    src="https://source.unsplash.com/random/300x300/?Red,wine,3"
+                                                    alt="Merlot" />
+                                            </figure>
+                                            <figcaption>
+                                                <header>
+                                                    <h5>Merlot</h5>
+                                                    <h5>7/35</h5>
+                                                </header>
+                                            </figcaption>
+                                        </article>
+
+                                        <!-- Red Blend -->
+                                        <article class="menu-item">
+                                            <figure><img class="item-img"
+                                                    src="https://source.unsplash.com/random/300x300/?Red,wine,4"
+                                                    alt="Red Blend" />
+                                            </figure>
+                                            <figcaption>
+                                                <header>
+                                                    <h5>Red Blend</h5>
+                                                    <h5>7/35</h5>
+                                                </header>
+                                            </figcaption>
+                                        </article>
+
+                                        <!-- Cabernet Sauvignon -->
+                                        <article class="menu-item">
+                                            <figure><img class="item-img"
+                                                    src="https://source.unsplash.com/random/300x300/?Red,wine,5"
+                                                    alt="Cabernet Sauvignon" />
+                                            </figure>
+                                            <figcaption>
+                                                <header>
+                                                    <h5>Cabernet Sauvignon</h5>
+                                                    <h5>8/40</h5>
+                                                </header>
+                                            </figcaption>
+                                        </article>
+
+                                        <!-- Zinfandel -->
+                                        <article class="menu-item">
+                                            <figure><img class="item-img"
+                                                    src="https://source.unsplash.com/random/300x300/?Red,wine,6"
+                                                    alt="Zinfandel" />
+                                            </figure>
+                                            <figcaption>
+                                                <header>
+                                                    <h5>Zinfandel</h5>
+                                                    <h5>9/45</h5>
+                                                </header>
+                                            </figcaption>
+                                        </article>
+
+                                        <!-- Tempranillo -->
+                                        <article class="menu-item">
+                                            <figure><img class="item-img"
+                                                    src="https://source.unsplash.com/random/300x300/?Red,wine,7"
+                                                    alt="Tempranillo" />
+                                            </figure>
+                                            <figcaption>
+                                                <header>
+                                                    <h5>Tempranillo</h5>
+                                                    <h5>8/40</h5>
+                                                </header>
+                                            </figcaption>
+                                        </article>
+
+                                        <!-- Malbec -->
+                                        <article class="menu-item">
+                                            <figure><img class="item-img"
+                                                    src="https://source.unsplash.com/random/300x300/?Red,wine,8"
+                                                    alt="Malbec" />
+                                            </figure>
+                                            <figcaption>
+                                                <header>
+                                                    <h5>Malbec</h5>
+                                                    <h5>7/35</h5>
+                                                </header>
+                                            </figcaption>
+                                        </article>
+
+                                        <!-- Shiraz/Syrah -->
+                                        <article class="menu-item">
+                                            <figure><img class="item-img"
+                                                    src="https://source.unsplash.com/random/300x300/?Red,wine,9"
+                                                    alt="Shiraz/Syrah" />
+                                            </figure>
+                                            <figcaption>
+                                                <header>
+                                                    <h5>Shiraz/Syrah</h5>
+                                                    <h5>7/35</h5>
+                                                </header>
+                                            </figcaption>
+                                        </article>
+
+                                        <!-- Amarone -->
+                                        <article class="menu-item">
+                                            <figure><img class="item-img"
+                                                    src="https://source.unsplash.com/random/300x300/?Red,wine,10"
+                                                    alt="Amarone" />
+                                            </figure>
+                                            <figcaption>
+                                                <header>
+                                                    <h5>Amarone</h5>
+                                                    <h5>8/40</h5>
+                                                </header>
+                                            </figcaption>
+                                        </article>
+
+                                        <!-- Brunello di Montalcino -->
+                                        <article class="menu-item">
+                                            <figure><img class="item-img"
+                                                    src="https://source.unsplash.com/random/300x300/?Red,wine,11"
+                                                    alt="Brunello di Montalcino" />
+                                            </figure>
+                                            <figcaption>
+                                                <header>
+                                                    <h5>Brunello di Montalcino</h5>
+                                                    <h5>9/45</h5>
+                                                </header>
+                                            </figcaption>
+                                        </article>
+                                    </section>
+                                </section>
+                            </section>
+
+                            <!--White Wines-->
+                            <section class="menu-category">
+                                <h3>White Wines</h3>
+                                <section class="category-items">
+
+                                    <!-- House White -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?white,wine,6"
+                                                alt="Pinot Grigio" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>House White</h5>
+                                                <h5>6/24</h5>
+                                            </header>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Pinot Grigio -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?white,wine,1"
+                                                alt="Pinot Grigio" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Pinot Grigio</h5>
+                                                <h5>8/40</h5>
+                                            </header>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Riesling -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?white,wine,2"
+                                                alt="Riesling" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Riesling</h5>
+                                                <h5>7/35</h5>
+                                            </header>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Chardonnay -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?white,wine,3"
+                                                alt="Chardonnay" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Chardonnay</h5>
+                                                <h5>8/40</h5>
+                                            </header>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Sauvignon Blanc -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?white,wine,4"
+                                                alt="Sauvignon Blanc" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Sauvignon Blanc</h5>
+                                                <h5>9/45</h5>
+                                            </header>
+                                        </figcaption>
+                                    </article>
+                                </section>
+                            </section>
+
+                            <!--Sparkling Wines-->
+                            <section class="menu-category">
+                                <h3>Sparkling & Rosé</h3>
+                                <section class="category-items">
+
+                                    <!-- Prosecco -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?sparkling,wine,1"
+                                                alt="Prosecco" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Prosecco</h5>
+                                                <h5>6/30</h5>
+                                            </header>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Rosé -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?rose,wine,2"
+                                                alt="Rosé" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Rosé</h5>
+                                                <h5>7/35</h5>
+                                            </header>
+                                        </figcaption>
+                                    </article>
+
+                                    <!-- Lambrusco -->
+                                    <article class="menu-item">
+                                        <figure><img class="item-img"
+                                                src="https://source.unsplash.com/random/300x300/?sparkling,wine,3"
+                                                alt="Lambrusco" />
+                                        </figure>
+                                        <figcaption>
+                                            <header>
+                                                <h5>Lambrusco</h5>
+                                                <h5>8/40</h5>
+                                            </header>
+                                        </figcaption>
+                                    </article>
+                                </section>
+                            </section>
+                        </section>
+
+                        <section class="menu-category">
+                            <h3>Beer</h3>
+                            <section class="category-items">
+                                <!-- Peroni -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?beer,1" alt="Peroni" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Peroni</h5>
+                                            <h5>5</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+                                <!-- Stella -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?beer,2" alt="Stella" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Stella</h5>
+                                            <h5>5</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+                                <!-- Blue Moon -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?beer,3" alt="Blue Moon" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Blue Moon</h5>
+                                            <h5>5</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+                                <!-- Bud Light -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?beer,4" alt="Bud Light" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Bud Light</h5>
+                                            <h5>4</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+                                <!-- Miller Lite -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?beer,5"
+                                            alt="Miller Lite" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Miller Lite</h5>
+                                            <h5>4</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+                                <!-- Seasonal Featured Beers -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?beer,6"
+                                            alt="Seasonal Featured Beers" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Seasonal Featured Beers</h5>
+                                            <h5>6</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+                            </section>
+                        </section>
+
+                        <!--Spirits-->
+                        <section class="menu-category">
+                            <h3>Premium Spirits</h3>
+                            <section class="category-items">
+
+                                <!-- Grey Goose Vodka -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?vodka,1"
+                                            alt="Grey Goose Vodka" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Grey Goose Vodka</h5>
+                                            <h5>7/13</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+
+                                <!-- Titos Vodka -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?vodka,2"
+                                            alt="Titos Vodka" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Titos Vodka</h5>
+                                            <h5>6/11</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+
+                                <!-- Bombay Sapphire Gin -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?gin,1"
+                                            alt="Bombay Sapphire Gin" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Bombay Sapphire Gin</h5>
+                                            <h5>7/13</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+
+                                <!-- Tangueray Gin -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?gin,2"
+                                            alt="Tangueray Gin" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Tangueray Gin</h5>
+                                            <h5>7/13</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+
+                                <!-- Bacardi Silver Rum -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?rum,1"
+                                            alt="Bacardi Silver Rum" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Bacardi Silver Rum</h5>
+                                            <h5>6/11</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+
+                                <!-- Knob Creek -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?whiskey,1"
+                                            alt="Knob Creek" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Knob Creek</h5>
+                                            <h5>8/15</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+
+                                <!-- Crown Royal -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?whiskey,2"
+                                            alt="Crown Royal" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Crown Royal</h5>
+                                            <h5>7/13</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+
+                                <!-- Kahlua -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?liqueur,1" alt="Kahlua" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Kahlua</h5>
+                                            <h5>6/11</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+
+                                <!-- Bailey's -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?liqueur,2"
+                                            alt="Bailey's" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Bailey's</h5>
+                                            <h5>6/11</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+
+                                <!-- Frangelico -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?liqueur,3"
+                                            alt="Frangelico" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Frangelico</h5>
+                                            <h5>7/13</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+
+                                <!-- DiSaronno Amaretto -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?liqueur,4"
+                                            alt="DiSaronno Amaretto" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>DiSaronno Amaretto</h5>
+                                            <h5>7/13</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+
+                                <!-- Dupeyrat Cognac -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?cognac,1"
+                                            alt="Dupeyrat Cognac" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Dupeyrat Cognac</h5>
+                                            <h5>9/17</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+
+                                <!-- Hennessy -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?cognac,2" alt="Hennessy" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Hennessy</h5>
+                                            <h5>9/17</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+
+                                <!-- Dewars Scotch -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?scotch,1"
+                                            alt="Dewars Scotch" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Dewars Scotch</h5>
+                                            <h5>7/13</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+
+                                <!-- Glenlivet 12yr Scotch -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?scotch,2"
+                                            alt="Glenlivet 12yr Scotch" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Glenlivet 12yr Scotch</h5>
+                                            <h5>10/19</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+
+                                <!-- Limoncello -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?liqueur,5"
+                                            alt="Limoncello" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Limoncello</h5>
+                                            <h5>6/11</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+
+                                <!-- Sambuca -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?liqueur,6" alt="Sambuca" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Sambuca</h5>
+                                            <h5>6/11</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+
+                                <!-- Grappa -->
+                                <article class="menu-item">
+                                    <figure><img class="item-img"
+                                            src="https://source.unsplash.com/random/300x300/?liqueur,7" alt="Grappa" />
+                                    </figure>
+                                    <figcaption>
+                                        <header>
+                                            <h5>Grappa</h5>
+                                            <h5>8/15</h5>
+                                        </header>
+                                    </figcaption>
+                                </article>
+
+                            </section>
+                        </section>
+                    </section>
+        </section>
+        </div>
+        </div>
         </section>
 
         <header class="section-header">
             <h2>About Us</h2>
         </header>
-        <section id="about-us">
+        <section id="about-us" class="animated-element">
             <div>
                 <img src="../Assets/Images/AboutUs.png" alt="About Us Image" />
                 <aside>
@@ -312,7 +2190,7 @@
         <header class="section-header">
             <h2>Contact Us</h2>
         </header>
-        <section>
+        <section class="animated-element">
             <section id="contact-us">
                 <section class="column">
                     <article>
@@ -434,13 +2312,13 @@
 
             <footer>
                 <section class="nav" style="box-shadow: none;">
-                <img src="../Assets/Images/Logo.png" alt="Footer Restaurant Logo" />
-                <nav>
-                    <a href="#top">Home</a>
-                    <a href="#menu">Menu</a>
-                    <a href="#about-us">About Us</a>
-                    <a href="#contact-us">Contact Us</a>
-                </nav>
+                    <img src="../Assets/Images/Logo.png" alt="Footer Restaurant Logo" />
+                    <nav>
+                        <a href="#top">Home</a>
+                        <a href="#menu">Menu</a>
+                        <a href="#about-us">About Us</a>
+                        <a href="#contact-us">Contact Us</a>
+                    </nav>
                 </section>
                 <section id="copyright" align="center">
                     <p>© 2024 MB La Dolce Vita, LLC</p>
